@@ -1,0 +1,21 @@
+<HTML>
+  <HEAD><SCRIPT type="text/javascript">
+    function updateOrder() {
+      const cakePrice = 1;
+      const bunPrice = 0.5;
+      var noCakes = document.getElementById("cake").value;
+      var noBuns = document.getElementById("bun").value;
+      document.getElementById("count").value = parseInt(noCakes) + parseInt(noBuns);
+      document.getElementById("total").value = "£" + (cakePrice*noCakes + bunPrice*noBuns);
+    }
+    function placeOrder(form) { form.submit(); }
+  </SCRIPT></HEAD>
+  <BODY><FORM method="get" action="someURL">
+    <H3>Cakes Cost £1 each; Buns 50p each</H3>
+    <input type=text name="cakeNo" id="cake" onchange="updateOrder()">enter no. cakes<br>
+    <input type=text name="bunNo" id="bun" onchange="updateOrder()">enter no. buns<br>
+    <input type=text name="count" id="count">number of units<br>
+    <input type=text name="total" id="total">Total Price<br>
+    <input type=button value="send" onClick="placeOrder(this.form)">
+  </FORM></BODY>
+</HTML>

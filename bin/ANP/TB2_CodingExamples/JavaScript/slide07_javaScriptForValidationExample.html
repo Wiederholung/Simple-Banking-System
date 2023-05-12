@@ -1,0 +1,20 @@
+<HTML>
+  <meta name="viewport" content="width=device-width">
+  <HEAD>
+    <SCRIPT>
+      function validate(){
+        if (document.forms[0].elements[0].value=="") {
+          alert("please enter your email");
+          return false;
+        }
+        return true;
+      }
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <FORM method="get" action="someURL" onSubmit="return validate()">
+      <label for="email">E-mail: </label> <input type=text name="email" id="email">
+      <input type=submit value="send">
+    </FORM>
+  </BODY>
+</HTML>
