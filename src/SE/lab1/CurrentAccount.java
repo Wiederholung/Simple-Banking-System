@@ -12,7 +12,7 @@ public class CurrentAccount extends BankAccount {
         this.overdraftLimit = odLimit;
     }
 
-    public Boolean withdraw(double amount) {
+    public boolean withdraw(double amount) {
         if (super.getBalance() + this.overdraftLimit >= amount) {
             super.setBalance(super.getBalance() - amount);
             return true;

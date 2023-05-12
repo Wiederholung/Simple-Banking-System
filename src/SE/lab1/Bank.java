@@ -1,72 +1,81 @@
 package SE.lab1;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Bank {
-    private ArrayList<BankAccount> accounts = new ArrayList<>();
+    private Map<String, BankAccount> accountMap = new HashMap<>();
 
-    public void openAccount(BankAccount acc) {
-        this.accounts.add(acc);
+    public void openAccount(BankAccount account) {
+        this.accountMap.put(account.getAccNo(), account);
     }
 
-    public int searchAccount(String accNo) {
-        for (BankAccount account : this.accounts) {
-            if (account.getAccNo().equals(accNo)) {
-                return this.accounts.indexOf(account);
-            }
+    public boolean isValid(String accNo) {
+        BankAccount account = this.accountMap.get(accNo);
+        if (account == null) {
+            System.out.println("Account not found");
+            return false;
         }
-        System.out.println("Account not found");
-        return -1;
+        if (account.isSuspended()) {
+            System.out.println("Account is suspended");
+            return false;
+        }
+        return true;
     }
 
-    public Boolean closeAccount(String accNo) {
-        int index = searchAccount(accNo);
-        if (index != -1) {
-            this.accounts.remove(index);
+    public boolean suspendAccount(String accNo) {
+        BankAccount account = this.accountMap.get(accNo);
+        if (account == null) {
+            System.out.println("Account not found");
+            return false;
+        }
+        account.setSuspended(true);
+        return true;
+    }
+
+    public boolean closeAccount(String accNo) {
+        if (this.isValid(accNo)) {
+            this.accountMap.remove(accNo);
             return true;
         }
         return false;
     }
 
-    public Boolean deposit(String accNo, double amount) {
-        int index = searchAccount(accNo);
-        if (index != -1) {
-            this.accounts.get(index).deposit(amount);
+    public boolean deposit(String accNo, double amount) {
+        if (this.isValid(accNo)) {
+            this.accountMap.get(accNo).deposit(amount);
             return true;
         }
         return false;
     }
 
-    public Boolean withdraw(String accNo, double amount) {
-        int index = searchAccount(accNo);
-        if (index != -1) {
-            return this.accounts.get(index).withdraw(amount);
+    public boolean withdraw(String accNo, double amount) {
+        if (this.isValid(accNo)) {
+            return this.accountMap.get(accNo).withdraw(amount);
         }
         return false;
     }
 
     public double checkBalance(String accNo) {
-        int index = searchAccount(accNo);
-        if (index != -1) {
-            return this.accounts.get(index).getBalance();
+        if (this.isValid(accNo)) {
+            return this.accountMap.get(accNo).getBalance();
         }
-        return -1;
+        return -1.0;
     }
 
     public void printAccount(String accNo) {
-        int index = searchAccount(accNo);
-        if (index != -1) {
-            System.out.println(this.accounts.get(index));
+        if (this.isValid(accNo)) {
+            System.out.println(this.accountMap.get(accNo));
         }
     }
 
     public void printAccounts() {
-        for (BankAccount account : this.accounts) {
+        for (BankAccount account : this.accountMap.values()) {
             System.out.println(account);
         }
     }
 
     public int getNumOfAccounts() {
-        return this.accounts.size();
+        return this.accountMap.size();
     }
 }

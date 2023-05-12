@@ -4,6 +4,7 @@ public class BankAccount {
     private final String accNo;
     private String accName;
     private double balance;
+    private boolean isSuspended = false;
 
     public BankAccount(String accNo, String accName) {
         this.accNo = accNo;
@@ -31,7 +32,7 @@ public class BankAccount {
         balance = balance + amount;
     }
 
-    public Boolean withdraw(double amount) {
+    public boolean withdraw(double amount) {
         if (balance >= amount) {
             balance = balance - amount;
             return true;
@@ -41,13 +42,18 @@ public class BankAccount {
     }
 
     public String toString() {
-        return "Account number: " + accNo
-                + "\n" + "Account type: " + this.getClass().getSimpleName()
-                + "\n" + "Account name: " + accName
-                + "\n" + "Balance: " + balance;
+        return "Account number: " + accNo + "\n" + "Account type: " + this.getClass().getSimpleName() + "\n" + "Account name: " + accName + "\n" + "Balance: " + balance;
     }
 
     protected void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public boolean isSuspended() {
+        return isSuspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        isSuspended = suspended;
     }
 }
