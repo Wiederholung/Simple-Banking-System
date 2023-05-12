@@ -1,4 +1,4 @@
-package SE;
+package SE.lab1;
 
 public class BankAccount {
     private final String accNo;
@@ -36,20 +36,18 @@ public class BankAccount {
             balance = balance - amount;
             return true;
         }
-        return false;
-    }
-
-    public Boolean withdraw(double amount, double overdraftLimit) {
-        if (balance + overdraftLimit >= amount) {
-            balance = balance - amount;
-            return true;
-        }
+        System.out.println("Insufficient balance");
         return false;
     }
 
     public String toString() {
         return "Account number: " + accNo
+                + "\n" + "Account type: " + this.getClass().getSimpleName()
                 + "\n" + "Account name: " + accName
                 + "\n" + "Balance: " + balance;
+    }
+
+    protected void setBalance(double balance) {
+        this.balance = balance;
     }
 }
