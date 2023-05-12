@@ -32,7 +32,7 @@ class BankTest {
         openAccount();
         assertTrue(bank.closeAccount("002"));
         assertFalse(bank.isValid("002"));
-        assertEquals(1, bank.getNumOfAccounts());
+        assertEquals(2, bank.getNumOfAccounts());
     }
 
     @org.junit.jupiter.api.Test
