@@ -46,13 +46,13 @@ class BankTest {
     @org.junit.jupiter.api.Test
     void withdraw() {
         deposit();
-        bank.withdraw("001", 500.0);
+        assertEquals(true, bank.withdraw("001", 500.0));
         assertEquals(500.0, bank.checkBalance("001"));
 
-        bank.withdraw("001", 700.0);
+        assertEquals(false, bank.withdraw("001", 700.0));
         assertEquals(500.0, bank.checkBalance("001"));
 
-        bank.withdraw("002", 700.0);
+        assertEquals(true, bank.withdraw("002", 700.0));
         assertEquals(-500.0, bank.checkBalance("002"));
     }
 

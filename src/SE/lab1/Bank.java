@@ -1,23 +1,18 @@
 package SE.lab1;
 
-public class Bank {
-    private BankAccount[] accounts;
-    private int numOfAccounts;
+import java.util.ArrayList;
 
-    public Bank() {
-        this.accounts = new BankAccount[100];
-        this.numOfAccounts = 0;
-    }
+public class Bank {
+    private ArrayList<BankAccount> accounts = new ArrayList<>();
 
     public void openAccount(BankAccount acc) {
-        this.accounts[this.numOfAccounts] = acc;
-        this.numOfAccounts++;
+        this.accounts.add(acc);
     }
 
     public int searchAccount(String accNo) {
-        for (int i = 0; i < this.numOfAccounts; i++) {
-            if (this.accounts[i].getAccNo().equals(accNo)) {
-                return i;
+        for (BankAccount account : this.accounts) {
+            if (account.getAccNo().equals(accNo)) {
+                return this.accounts.indexOf(account);
             }
         }
         System.out.println("Account not found");
@@ -27,9 +22,7 @@ public class Bank {
     public Boolean closeAccount(String accNo) {
         int index = searchAccount(accNo);
         if (index != -1) {
-            this.accounts[index] = this.accounts[this.numOfAccounts - 1];
-            this.accounts[this.numOfAccounts - 1] = null;
-            this.numOfAccounts--;
+            this.accounts.remove(index);
             return true;
         }
         return false;
@@ -38,7 +31,7 @@ public class Bank {
     public Boolean deposit(String accNo, double amount) {
         int index = searchAccount(accNo);
         if (index != -1) {
-            this.accounts[index].deposit(amount);
+            this.accounts.get(index).deposit(amount);
             return true;
         }
         return false;
@@ -47,7 +40,7 @@ public class Bank {
     public Boolean withdraw(String accNo, double amount) {
         int index = searchAccount(accNo);
         if (index != -1) {
-            return this.accounts[index].withdraw(amount);
+            return this.accounts.get(index).withdraw(amount);
         }
         return false;
     }
@@ -55,7 +48,7 @@ public class Bank {
     public double checkBalance(String accNo) {
         int index = searchAccount(accNo);
         if (index != -1) {
-            return this.accounts[index].getBalance();
+            return this.accounts.get(index).getBalance();
         }
         return -1;
     }
@@ -63,17 +56,17 @@ public class Bank {
     public void printAccount(String accNo) {
         int index = searchAccount(accNo);
         if (index != -1) {
-            System.out.println(this.accounts[index]);
+            System.out.println(this.accounts.get(index));
         }
     }
 
     public void printAccounts() {
-        for (int i = 0; i < this.numOfAccounts; i++) {
-            System.out.println(this.accounts[i]);
+        for (BankAccount account : this.accounts) {
+            System.out.println(account);
         }
     }
 
     public int getNumOfAccounts() {
-        return numOfAccounts;
+        return this.accounts.size();
     }
 }
