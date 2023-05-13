@@ -10,32 +10,32 @@ public class BankAccountTest {
     private BankAccount account;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         account = new BankAccount("001", "John");
         account.deposit(500.0);
     }
 
     @Test
-    public void testDeposit() {
+    void testDeposit() {
         account.deposit(100.0);
         assertEquals(600.0, account.getBalance());
     }
 
     @Test
-    public void testWithdrawValidAmount() {
+    void testWithdrawValidAmount() {
         testDeposit();
         account.withdraw(100.0);
         assertEquals(500.0, account.getBalance());
     }
 
     @Test
-    public void testWithdrawInvalidAmount() {
+    void testWithdrawInvalidAmount() {
         assertFalse(account.withdraw(500.1));
         assertEquals(500.0, account.getBalance());
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         String expected = """
                 Account number: 001
                 Account type: BankAccount

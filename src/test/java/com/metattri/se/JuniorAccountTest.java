@@ -9,13 +9,13 @@ public class JuniorAccountTest {
     private JuniorAccount account;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         account = new JuniorAccount("003", "David", 12);
         account.deposit(100);
     }
 
     @Test
-    public void testWithdraw() {
+    void testWithdraw() {
         assertTrue(account.withdraw(10.0));
         assertEquals(90.0, account.getBalance());
 
@@ -24,12 +24,12 @@ public class JuniorAccountTest {
     }
 
     @Test
-    public void testGetWithdrawLimit() {
+    void testGetWithdrawLimit() {
         assertEquals(100.0, account.getWithdrawLimit());
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         String expected = """
                 Account number: 003
                 Account type: JuniorAccount

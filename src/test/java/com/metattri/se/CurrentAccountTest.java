@@ -9,36 +9,36 @@ public class CurrentAccountTest {
     private CurrentAccount account;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         account = new CurrentAccount("002", "Mary");
         account.deposit(500);
     }
 
     @Test
-    public void testWithdrawWithinBalanceAndOverdraftLimit() {
+    void testWithdrawWithinBalanceAndOverdraftLimit() {
         assertTrue(account.withdraw(600.0));
         assertEquals(-100.0, account.getBalance());
     }
 
     @Test
-    public void testWithdrawOverBalanceAndOverdraftLimit() {
+    void testWithdrawOverBalanceAndOverdraftLimit() {
         assertFalse(account.withdraw(1000.1));
         assertEquals(500.0, account.getBalance());
     }
 
     @Test
-    public void testGetOverdraftLimit() {
+    void testGetOverdraftLimit() {
         assertEquals(500.0, account.getOverdraftLimit());
     }
 
     @Test
-    public void testSetOverdraftLimit() {
+    void testSetOverdraftLimit() {
         account.setOverdraftLimit(2000.0);
         assertEquals(2000.0, account.getOverdraftLimit());
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         String expected = """
                 Account number: 002
                 Account type: CurrentAccount
