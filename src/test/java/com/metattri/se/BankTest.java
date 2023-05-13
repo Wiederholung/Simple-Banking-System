@@ -15,12 +15,12 @@ class BankTest {
         bank.openAccount("003", "David", 12);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testGetNumOfAccounts() {
         assertEquals(3, bank.getNumOfAccounts());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testDeposit() {
         assertTrue(bank.deposit("001", 1000.0));
         assertEquals(1000.0, bank.checkBalance("001"));
@@ -32,7 +32,7 @@ class BankTest {
         assertEquals(150.0, bank.checkBalance("003"));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testWithdraw() {
         testDeposit();
 
@@ -60,11 +60,13 @@ class BankTest {
         assertTrue(bank.suspendAccount("001", true));
         assertFalse(bank.deposit("001", 1000.0));
 
+        assertEquals(3, bank.getNumOfAccounts());
+
         assertTrue(bank.suspendAccount("001", false));
         assertTrue(bank.deposit("001", 1000.0));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void closeAccount() {
         assertTrue(bank.closeAccount("002"));
         assertFalse(bank.isValid("002"));

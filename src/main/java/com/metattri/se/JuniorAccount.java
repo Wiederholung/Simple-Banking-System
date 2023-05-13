@@ -37,7 +37,7 @@ public class JuniorAccount extends BankAccount {
         this.age = age;
     }
 
-    public void loadAmount() {
+    private void loadAmount() {
         String currentDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
@@ -57,7 +57,7 @@ public class JuniorAccount extends BankAccount {
         }
     }
 
-    public void saveAmount() {
+    private void saveAmount() {
         String currentDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -86,5 +86,9 @@ public class JuniorAccount extends BankAccount {
         } catch (IOException e) {
             System.err.println("Error writing log file: " + e.getMessage());
         }
+    }
+
+    public double getWithdrawLimit() {
+        return MAX_WITHDRAW;
     }
 }

@@ -1,58 +1,46 @@
 package com.metattri.se;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class BankAccountTest {
+public class BankAccountTest {
+    private BankAccount account;
 
     @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void getAccNo() {
+    public void setUp() {
+        account = new BankAccount("001", "John");
+        account.deposit(500.0);
     }
 
     @Test
-    void getAccName() {
+    public void testDeposit() {
+        account.deposit(100.0);
+        assertEquals(600.0, account.getBalance());
     }
 
     @Test
-    void setAccName() {
+    public void testWithdrawValidAmount() {
+        testDeposit();
+        account.withdraw(100.0);
+        assertEquals(500.0, account.getBalance());
     }
 
     @Test
-    void getBalance() {
+    public void testWithdrawInvalidAmount() {
+        assertFalse(account.withdraw(500.1));
+        assertEquals(500.0, account.getBalance());
     }
 
     @Test
-    void setBalance() {
-    }
-
-    @Test
-    void deposit() {
-    }
-
-    @Test
-    void withdraw() {
-    }
-
-    @Test
-    void testToString() {
-    }
-
-    @Test
-    void isSuspended() {
-    }
-
-    @Test
-    void setSuspended() {
+    public void testToString() {
+        String expected = """
+                Account number: 001
+                Account type: BankAccount
+                Account name: John
+                Balance: 500.0""";
+        assertEquals(expected, account.toString());
     }
 }
