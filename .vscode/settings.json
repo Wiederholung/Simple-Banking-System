@@ -1,9 +1,0 @@
-{
-    "java.project.sourcePaths": ["src"],
-    "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar"
-    ],
-    "liveServer.settings.port": 5525,
-    "livePreview.defaultPreviewPath": "c:\\Users\\Wiede\\OneDrive - Queen Mary, University of London\\Documentation\\Projects\\Code-Test\\Java\\src\\ANP\\TB2_CodingExamples\\JavaScript\\slide07_javaScriptForValidationExample.html"
-}
