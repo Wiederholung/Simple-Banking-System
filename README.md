@@ -20,8 +20,8 @@ deposit and withdraw money, and manage their accounts.
 
 ### Installation
 
-1. Clone the repository `https://github.com/Wiederholung/CodeTest-Java.git`
-2. `cd CodeTest-Java`
+1. Clone the repository `git clone https://github.com/Wiederholung/CodeTest-Java.git`
+2. `cd CodeTest-Java` or **open the project in IDEA (recommended)**
 3. Compile `mvn compile`
 4. Run unit tests `mvn test`
 
