@@ -1,20 +1,20 @@
 <HTML>
-  <meta name="viewport" content="width=device-width">
-  <HEAD>
+<meta content="width=device-width" name="viewport">
+<HEAD>
     <SCRIPT>
-      function validate(){
-        if (document.forms[0].elements[0].value=="") {
-          alert("please enter your email");
-          return false;
+        function validate() {
+            if (document.forms[0].elements[0].value == "") {
+                alert("please enter your email");
+                return false;
+            }
+            return true;
         }
-        return true;
-      }
     </SCRIPT>
-  </HEAD>
-  <BODY>
-    <FORM method="get" action="someURL" onSubmit="return validate()">
-      <label for="email">E-mail: </label> <input type=text name="email" id="email">
-      <input type=submit value="send">
-    </FORM>
-  </BODY>
+</HEAD>
+<BODY>
+<FORM action="someURL" method="get" onSubmit="return validate()">
+    <label for="email">E-mail: </label> <input id="email" name="email" type=text>
+    <input type=submit value="send">
+</FORM>
+</BODY>
 </HTML>

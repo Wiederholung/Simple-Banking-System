@@ -11,7 +11,7 @@ public class SleepyCounter implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("SleepyCounter: ==>"+count);
+            System.out.println("SleepyCounter: ==>" + count);
         }
     }
 }

@@ -1,20 +1,23 @@
 <HTML>
-  <HEAD>
+<HEAD>
     <SCRIPT type="text/javascript">
-      function updateOrder() {
-        const cakePrice = 1;
-        var noCakes = document.getElementById("cake").value;
-        document.getElementById("total").value = "£" + cakePrice*noCakes;
-      }
-      function placeOrder(form){ form.submit(); }
+        function updateOrder() {
+            const cakePrice = 1;
+            var noCakes = document.getElementById("cake").value;
+            document.getElementById("total").value = "ï¿½" + cakePrice * noCakes;
+        }
+
+        function placeOrder(form) {
+            form.submit();
+        }
     </SCRIPT>
-  </HEAD>
-  <BODY>
-    <FORM method="get" action="someURL">
-      <H3>Cakes Cost £1 each</H3>
-      <input type=text name="cakeNo" id="cake" onchange="updateOrder()">enter no. cakes<br>
-      <input type=text name="total" id="total">Total Price<br>
-      <input type=button value="send" onClick="placeOrder(this.form)">
-    </FORM>
-  </BODY>
+</HEAD>
+<BODY>
+<FORM action="someURL" method="get">
+    <H3>Cakes Cost ï¿½1 each</H3>
+    <input id="cake" name="cakeNo" onchange="updateOrder()" type=text>enter no. cakes<br>
+    <input id="total" name="total" type=text>Total Price<br>
+    <input onClick="placeOrder(this.form)" type=button value="send">
+</FORM>
+</BODY>
 </HTML>

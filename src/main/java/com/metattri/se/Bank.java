@@ -10,6 +10,21 @@ public class Bank {
         this.accountMap.put(account.getAccNo(), account);
     }
 
+    public void openAccount(String accNo, String accName) {
+        BankAccount account = new BankAccount(accNo, accName);
+        openAccount(account);
+    }
+
+    public void openAccount(String accNo, String accName, Double odLimit) {
+        CurrentAccount account = new CurrentAccount(accNo, accName, odLimit);
+        openAccount(account);
+    }
+
+    public void openAccount(String accNo, String accName, int age) {
+        JuniorAccount account = new JuniorAccount(accNo, accName, age);
+        openAccount(account);
+    }
+
     public boolean isValid(String accNo) {
         BankAccount account = this.accountMap.get(accNo);
         if (account == null) {
@@ -23,13 +38,13 @@ public class Bank {
         return true;
     }
 
-    public boolean suspendAccount(String accNo) {
+    public boolean suspendAccount(String accNo, boolean isSuspended) {
         BankAccount account = this.accountMap.get(accNo);
         if (account == null) {
             System.out.println("Account not found");
             return false;
         }
-        account.setSuspended(true);
+        account.setSuspended(isSuspended);
         return true;
     }
 

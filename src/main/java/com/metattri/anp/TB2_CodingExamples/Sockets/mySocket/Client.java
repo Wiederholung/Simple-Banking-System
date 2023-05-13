@@ -1,10 +1,11 @@
 package com.metattri.anp.TB2_CodingExamples.Sockets.mySocket;
 
 import java.io.*;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.Socket;
 
 public class Client {
-    
+
     public static void main(String[] args) {
         // byte[] ipAddr = new byte[] {10, 28, (byte) 233, 15};
         // try (Socket socket = new Socket(InetAddress.getByAddress(ipAddr), Server.PORT)) {

@@ -1,10 +1,15 @@
 package com.metattri.anp.TB2_CodingExamples.Sockets.mySocket;
 
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
     public static final int PORT = 8989;
+
     public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(PORT)) {
             System.out.println("Server started");

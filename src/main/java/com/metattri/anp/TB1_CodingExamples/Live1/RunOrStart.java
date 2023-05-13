@@ -8,19 +8,19 @@ package com.metattri.anp.TB1_CodingExamples.Live1;
  */
 public class RunOrStart implements Runnable {
 
-	public void run() {
-		System.out.println("this is the run method");
-	}
-	
-	public void start() {
-		System.out.println("this is the start method");
-	}
-
-	public static void main(String[] args) {
-		RunOrStart myFirstThreadRunnable = new RunOrStart();
-		Thread thread = new Thread(myFirstThreadRunnable);
-		thread.start();
+    public static void main(String[] args) {
+        RunOrStart myFirstThreadRunnable = new RunOrStart();
+        Thread thread = new Thread(myFirstThreadRunnable);
+        thread.start();
 //		thread.run();
-		
-	}
+
+    }
+
+    public void run() {
+        System.out.println("this is the run method");
+    }
+
+    public void start() {
+        System.out.println("this is the start method");
+    }
 }

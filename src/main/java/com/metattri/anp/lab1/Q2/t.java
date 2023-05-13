@@ -2,7 +2,7 @@ package com.metattri.anp.lab1.Q2;
 
 /**
  * Thread.sleep() 方法会抛出一个 InterruptedException 异常，当线程被 sleep() 休眠时，如果被中断，这会就抛出这个异常。
- *         （注意：Thread.sleep() 方法由于中断而抛出的异常，是会清除中断标记的。）
+ * （注意：Thread.sleep() 方法由于中断而抛出的异常，是会清除中断标记的。）
  */
 
 public class t {
@@ -15,11 +15,11 @@ public class t {
             } catch (InterruptedException e) {
                 System.out.println("thread InterruptedException");
             }
-            for (int i=0;i<3000;i++){
-                if(Thread.currentThread().isInterrupted()){
+            for (int i = 0; i < 3000; i++) {
+                if (Thread.currentThread().isInterrupted()) {
                     System.out.println("thread isInterrupted");
                     break;
-                }else {
+                } else {
                     System.out.println(i);
                 }
             }
@@ -31,7 +31,7 @@ public class t {
             Thread.sleep(10);
             System.out.println("main sleep 10ms end");
         } catch (InterruptedException e) {
-            System.out.println("InterruptedException:"+e);
+            System.out.println("InterruptedException:" + e);
         }
         System.out.println("thread interrupt");
 //        thread.stop();
@@ -42,7 +42,7 @@ public class t {
             Thread.sleep(2000);
             System.out.println("main sleep 2s end");
         } catch (InterruptedException e) {
-            System.out.println("InterruptedException:"+e);
+            System.out.println("InterruptedException:" + e);
         }
         System.out.println("main end");
     }

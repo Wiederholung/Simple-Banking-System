@@ -53,7 +53,7 @@ public class BankAccount {
         return isSuspended;
     }
 
-    public void setSuspended(boolean suspended) {
-        isSuspended = suspended;
+    public void setSuspended(boolean isSuspended) {
+        this.isSuspended = isSuspended;
     }
 }

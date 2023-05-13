@@ -13,24 +13,26 @@ public class VolatileTest {
     static class ChangeListener extends Thread {
         public void run() {
             int local_value = x;
-            while ( local_value < 5){
-                if( local_value!= x){
-                    System.out.println("Got Change for x "+ x);
-                     local_value= x;
+            while (local_value < 5) {
+                if (local_value != x) {
+                    System.out.println("Got Change for x " + x);
+                    local_value = x;
                 }
             }
         }
     }
 
-    static class ChangeMaker extends Thread{
+    static class ChangeMaker extends Thread {
         public void run() {
             int local_value = x;
-            while (x <5){
-                System.out.println("Incrementing x to "+ (local_value+1));
+            while (x < 5) {
+                System.out.println("Incrementing x to " + (local_value + 1));
                 x = ++local_value;
                 try {
                     Thread.sleep(500);
-                } catch (InterruptedException e) { e.printStackTrace(); }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
