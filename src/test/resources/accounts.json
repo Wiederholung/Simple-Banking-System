@@ -3,9 +3,9 @@
     "accNo": "cc24d6ea-ca28-49da-b8d5-1b8b60376db4",
     "type": "JuniorAccount",
     "accName": "Kid2",
-    "balance": 0.0,
+    "balance": 500.0,
     "isSuspended": false,
-    "age": 14,
+    "age": 16,
     "maxWithdraw": 200.0,
     "amount": 0.0,
     "lastWithdrawalDate": null
