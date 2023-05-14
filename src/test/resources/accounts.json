@@ -29,12 +29,12 @@
     "lastWithdrawalDate": "2023-05-16"
   },
   {
-    "accNo": "bd4eba8a-cc10-4339-8f31-82d6ec567b5b",
+    "accNo": "test",
     "type": "CurrentAccount",
-    "accName": "Yitong Hu",
+    "accName": "WdH",
     "balance": 0.0,
     "isSuspended": false,
-    "overdraftLimit": 100000.0
+    "overdraftLimit": 1000.0
   },
   {
     "accNo": "f4566a74-379a-409a-a24b-69b542f4566c",
