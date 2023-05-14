@@ -92,7 +92,7 @@ Note
 4. After running the [JUnit tests](src/test/java/com/metattri/se)
    or [Sample.java](src/main/java/com/metattri/se/Sample.java), you can check the database file to see the changes.
 
-5. Remember to roll back the changes in the [accounts.json](src/main/resources/accounts.json) if you want to run the
+5. Remember to [rollback](https://stackoverflow.com/questions/6599798/how-to-undo-a-git-rollback) the changes in the [accounts.json](src/main/resources/accounts.json) if you want to run the
    tests again.
 
 ## Contributor
