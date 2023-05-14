@@ -66,11 +66,11 @@ class BankTest {
     }
 
     @Test
-    void testCloseAccount() {
+    void testCloseAndOpenAccount() {
         assertTrue(bank.closeAccount("test"));
         assertFalse(bank.isValid("test"));
-        assertEquals(5, bank.getNumOfAccounts());
-
+        assertEquals(4, bank.getNumOfAccounts());
+        bank.openAccount("Yitong Hu", 100000.0);
         bank.printAccounts();
     }
 
