@@ -1,14 +1,10 @@
 package com.metattri.se;
 
-import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class JuniorAccount extends BankAccount {
-    private final String FILE_PATH = "jun_acc_amt.csv";
     private int age;
     private double maxWithdraw = 100.0;
     private double amount;
@@ -53,57 +49,6 @@ public class JuniorAccount extends BankAccount {
         this.age = age;
     }
 
-    private void loadAmount() {
-        String currentDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] components = line.split(",");
-                if (components.length >= 3 && components[1].equals(super.getAccNo()) && components[0].equals(currentDate)) {
-                    try {
-                        this.amount = Double.parseDouble(components[2]);
-                        return;
-                    } catch (NumberFormatException e) {
-                        System.err.println("Invalid amount in log file: " + components[2]);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading log file: " + e.getMessage());
-        }
-    }
-
-    private void saveAmount() {
-        String currentDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading log file: " + e.getMessage());
-            return;
-        }
-
-        for (int i = 0; i < lines.size(); i++) {
-            String[] components = lines.get(i).split(",");
-            if (components.length < 3 || (components[1].equals(super.getAccNo()) && components[0].equals(currentDate))) {
-                lines.remove(i);
-            }
-        }
-        lines.add(currentDate + "," + super.getAccNo() + "," + this.amount);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (String line : lines) {
-                writer.write(line);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.err.println("Error writing log file: " + e.getMessage());
-        }
-    }
-
     public double getMaxWithdraw() {
         return maxWithdraw;
     }
@@ -112,15 +57,7 @@ public class JuniorAccount extends BankAccount {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public String getLastWithdrawalDate() {
         return lastWithdrawalDate;
-    }
-
-    public void setLastWithdrawalDate(String lastWithdrawalDate) {
-        this.lastWithdrawalDate = lastWithdrawalDate;
     }
 }

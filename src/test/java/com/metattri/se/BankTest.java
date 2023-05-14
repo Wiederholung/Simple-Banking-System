@@ -8,12 +8,12 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankTest {
-    private Bank bank;
     private final String[] uuid = {
             "f7790c67-2dbc-4df4-91d9-8d6fc7645264",
             "f4566a74-379a-409a-a24b-69b542f4566c",
             "a85e67d1-d99a-403e-883c-9a020a44ca22",
     };
+    private Bank bank;
 
     @BeforeEach
     void setUp() {
@@ -63,6 +63,7 @@ class BankTest {
         assertTrue(bank.closeAccount("test"));
         assertFalse(bank.isValid("test"));
         assertEquals(4, bank.getNumOfAccounts());
+
         bank.openAccount("Yitong Hu", 200000.0);
         bank.openAccount("John2", "CurrentAccount");
         bank.openAccount("Jane2", "BankAccount");
@@ -74,5 +75,10 @@ class BankTest {
     @Test
     void testSaveAccounts() {
         bank.saveAccounts();
+    }
+
+    @Test
+    void testChangeAccountType() {
+        System.out.println(bank.changeAccountType("cc24d6ea-ca28-49da-b8d5-1b8b60376db4", "CurrentAccount"));
     }
 }

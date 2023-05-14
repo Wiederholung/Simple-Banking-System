@@ -96,6 +96,25 @@ public class Bank {
         return false;
     }
 
+    public String changeAccountType(String accNo, String accType) {
+        if (this.isValid(accNo)) {
+            JuniorAccount currAccount = (JuniorAccount) this.accountMap.get(accNo);
+
+            if (currAccount.getAge() >= 16) {
+                BankAccount account = switch (accType) {
+                    case "CurrentAccount" -> new CurrentAccount(currAccount.getAccName());
+                    case "BankAccount" -> new BankAccount(currAccount.getAccName());
+                    default -> throw new IllegalArgumentException("Invalid account type");
+                };
+                this.accountMap.put(account.getAccNo(), account);
+                this.deposit(account.getAccNo(), currAccount.getBalance());
+                this.closeAccount(accNo);
+                return account.getAccNo();
+            }
+        }
+        return null;
+    }
+
     public double checkBalance(String accNo) {
         if (this.isValid(accNo)) {
             return this.accountMap.get(accNo).getBalance();
