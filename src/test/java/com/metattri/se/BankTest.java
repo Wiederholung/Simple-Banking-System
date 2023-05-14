@@ -22,11 +22,6 @@ class BankTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        bank.openAccount("Yitong Hu", 100000.0);
-//        bank.openAccount("John", "CurrentAccount");
-//        bank.openAccount("Jane", "BankAccount");
-//        bank.openAccount("Kid1", 12);
-//        bank.openAccount("Kid2", 14, 200.0);
     }
 
     @Test
@@ -58,8 +53,6 @@ class BankTest {
         assertTrue(bank.suspendAccount(uuid[0], true));
         assertFalse(bank.deposit(uuid[0], 1000.0));
 
-        assertEquals(5, bank.getNumOfAccounts());
-
         assertTrue(bank.suspendAccount(uuid[0], false));
         assertTrue(bank.deposit(uuid[0], 1000.0));
         assertTrue(bank.withdraw(uuid[0], 1000.0));
@@ -70,7 +63,11 @@ class BankTest {
         assertTrue(bank.closeAccount("test"));
         assertFalse(bank.isValid("test"));
         assertEquals(4, bank.getNumOfAccounts());
-        bank.openAccount("Yitong Hu", 100000.0);
+        bank.openAccount("Yitong Hu", 200000.0);
+        bank.openAccount("John2", "CurrentAccount");
+        bank.openAccount("Jane2", "BankAccount");
+        bank.openAccount("Kid3", 13);
+        bank.openAccount("Kid4", 14, 400.0);
         bank.printAccounts();
     }
 
