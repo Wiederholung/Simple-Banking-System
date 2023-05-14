@@ -25,14 +25,14 @@
     "isSuspended": false,
     "age": 12,
     "maxWithdraw": 100.0,
-    "amount": 0.0,
-    "lastWithdrawalDate": null
+    "amount": 40.0,
+    "lastWithdrawalDate": "2023-05-16"
   },
   {
     "accNo": "bd4eba8a-cc10-4339-8f31-82d6ec567b5b",
     "type": "CurrentAccount",
     "accName": "Yitong Hu",
-    "balance": 1000.0,
+    "balance": 0.0,
     "isSuspended": false,
     "overdraftLimit": 100000.0
   },
