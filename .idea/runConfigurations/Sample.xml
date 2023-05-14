@@ -1,16 +1,14 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CurrentAccountTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+  <configuration default="false" name="Sample" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="com.metattri.se.Sample" />
     <module name="Java" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.metattri.se.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="com.metattri.se" />
-    <option name="MAIN_CLASS_NAME" value="com.metattri.se.CurrentAccountTest" />
-    <option name="METHOD_NAME" value="" />
-    <option name="TEST_OBJECT" value="class" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

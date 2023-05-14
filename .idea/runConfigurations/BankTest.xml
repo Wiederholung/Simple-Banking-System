@@ -11,7 +11,6 @@
     <option name="MAIN_CLASS_NAME" value="com.metattri.se.BankTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
-    <option name="WORKING_DIRECTORY" value="$MODULE_DIR$/src/test/resources" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

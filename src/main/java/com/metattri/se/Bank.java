@@ -12,7 +12,7 @@ import java.util.Map;
 public class Bank {
     private final Map<String, BankAccount> accountMap = new HashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final File dataFile = new File("accounts.json");
+    private final File dataFile = new File("src/main/resources/accounts.json");
 
     public Bank() throws IOException {
         this.loadAccounts();

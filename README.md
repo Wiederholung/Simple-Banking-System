@@ -42,23 +42,58 @@ deposit and withdraw money, and manage their accounts.
 
 ## Usage
 
-[//]: # (TODO)
 You can create different types of accounts with varying properties and features. A sample code shows how to create an
 account and perform some actions on it:
 
 ```java
 package com.metattri.se;
 
+import java.io.IOException;
+
 public class Sample {
     public static void main(String[] args) {
-        Bank bank = new Bank();
-        bank.openAccount(new CurrentAccount("001", Mary));
-        bank.deposit("001", 500.0);
-        bank.withdraw("001", 750.0);
-        bank.closeAccount("001");
+        Bank bank;
+        try {
+            bank = new Bank();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        bank.openAccount(new CurrentAccount("your name"));
+
+        bank.deposit("test", 500.0);
+        bank.withdraw("test", 1000.0);
+        System.out.println(bank.checkBalance("test"));
+
+        bank.suspendAccount("test", true);
+        assert !bank.deposit("test", 1000.0);
+        bank.suspendAccount("test", false);
+
+        String newAccNo = bank.changeAccountType("cc24d6ea-ca28-49da-b8d5-1b8b60376db4", "CurrentAccount");
+
+        bank.closeAccount(newAccNo);
+
+        bank.printAccounts();
     }
 }
 ```
+
+Note
+
+1. See more usage in the [JUnit tests](src/test/java/com/metattri/se).
+
+2. The account number is a UUID, which is a random string. You can look up the account number via calling
+   `bank.printAccounts();`.
+
+3. The database file [accounts.json](src/main/resources/accounts.json) is stored in the directory `src/main/resources`,
+   which is the default directory for resources in Maven. You can change the directory in
+   the [Bank.java](src/main/java/com/metattri/se/Bank.java) file.
+
+4. After running the [JUnit tests](src/test/java/com/metattri/se)
+   or [Sample.java](src/main/java/com/metattri/se/Sample.java), you can check the database file to see the changes.
+
+5. Remember to roll back the changes in the [accounts.json](src/main/resources/accounts.json) if you want to run the
+   tests again.
 
 ## Contributor
 
