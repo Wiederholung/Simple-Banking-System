@@ -6,23 +6,39 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class JuniorAccount extends BankAccount {
-    private final double MAX_WITHDRAW = 100.0;
     private final String FILE_PATH = "jun_acc_amt.csv";
     private int age;
-    private double amount = 0.0;
+    private double maxWithdraw = 100.0;
+    private double amount;
 
-    public JuniorAccount(String accNo, String accName, int age) {
-        super(accNo, accName);
+
+    private String lastWithdrawalDate;
+
+    public JuniorAccount() {
+        super();
+    }
+
+    public JuniorAccount(String accName, int age) {
+        this();
+        this.setAccName(accName);
         this.age = age;
-        this.loadAmount();
+    }
+
+    public JuniorAccount(String accName, int age, double maxWithdraw) {
+        this(accName, age);
+        this.maxWithdraw = maxWithdraw;
     }
 
     public boolean withdraw(double amount) {
-        if (super.getBalance() >= amount && amount <= this.MAX_WITHDRAW - this.amount) {
+        if (!LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE).equals(this.lastWithdrawalDate)) {
+            this.amount = 0.0;
+        }
+        if (super.getBalance() >= amount && amount <= this.maxWithdraw - this.amount) {
             super.setBalance(super.getBalance() - amount);
             this.amount += amount;
-            this.saveAmount();
+            this.lastWithdrawalDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
             return true;
         }
         System.out.println("Withdraw amount exceeds the maximum amount today");
@@ -88,7 +104,23 @@ public class JuniorAccount extends BankAccount {
         }
     }
 
-    public double getWithdrawLimit() {
-        return MAX_WITHDRAW;
+    public double getMaxWithdraw() {
+        return maxWithdraw;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getLastWithdrawalDate() {
+        return lastWithdrawalDate;
+    }
+
+    public void setLastWithdrawalDate(String lastWithdrawalDate) {
+        this.lastWithdrawalDate = lastWithdrawalDate;
     }
 }

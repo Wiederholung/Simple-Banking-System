@@ -3,12 +3,17 @@ package com.metattri.se;
 public class CurrentAccount extends BankAccount {
     private double overdraftLimit = 500.0;
 
-    public CurrentAccount(String accNo, String accName) {
-        super(accNo, accName);
+    public CurrentAccount() {
+        super();
     }
 
-    public CurrentAccount(String accNo, String accName, double odLimit) {
-        super(accNo, accName);
+    public CurrentAccount(String accName) {
+        this();
+        this.setAccName(accName);
+    }
+
+    public CurrentAccount(String accName, double odLimit) {
+        this(accName);
         this.overdraftLimit = odLimit;
     }
 

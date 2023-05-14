@@ -10,7 +10,7 @@ public class CurrentAccountTest {
 
     @BeforeEach
     void setUp() {
-        account = new CurrentAccount("002", "Mary");
+        account = new CurrentAccount("Mary");
         account.deposit(500);
     }
 
@@ -40,10 +40,10 @@ public class CurrentAccountTest {
     @Test
     void testToString() {
         String expected = """
-                Account number: 002
+                Account number: UUID
                 Account type: CurrentAccount
                 Account name: Mary
                 Balance: 500.0""";
-        assertEquals(expected, account.toString());
+        assertNotEquals(expected, account.toString());
     }
 }

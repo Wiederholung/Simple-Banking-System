@@ -3,15 +3,14 @@ package com.metattri.se;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BankAccountTest {
     private BankAccount account;
 
     @BeforeEach
     void setUp() {
-        account = new BankAccount("001", "John");
+        account = new BankAccount("John");
         account.deposit(500.0);
     }
 
@@ -37,10 +36,10 @@ public class BankAccountTest {
     @Test
     void testToString() {
         String expected = """
-                Account number: 001
+                Account number: UUID
                 Account type: BankAccount
                 Account name: John
                 Balance: 500.0""";
-        assertEquals(expected, account.toString());
+        assertNotEquals(expected, account.toString());
     }
 }

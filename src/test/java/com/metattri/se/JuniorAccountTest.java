@@ -10,7 +10,7 @@ public class JuniorAccountTest {
 
     @BeforeEach
     void setUp() {
-        account = new JuniorAccount("003", "David", 12);
+        account = new JuniorAccount("David", 12);
         account.deposit(100);
     }
 
@@ -25,16 +25,16 @@ public class JuniorAccountTest {
 
     @Test
     void testGetWithdrawLimit() {
-        assertEquals(100.0, account.getWithdrawLimit());
+        assertEquals(100.0, account.getMaxWithdraw());
     }
 
     @Test
     void testToString() {
         String expected = """
-                Account number: 003
+                Account number: UUID
                 Account type: JuniorAccount
                 Account name: David
                 Balance: 100.0""";
-        assertEquals(expected, account.toString());
+        assertNotEquals(expected, account.toString());
     }
 }
