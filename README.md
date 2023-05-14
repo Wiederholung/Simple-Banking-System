@@ -1,4 +1,4 @@
-# Bank Account Management System
+# Simple Banking System
 
 This is a Java project that implements a basic bank account management system, allowing users to create accounts,
 deposit and withdraw money, and manage their accounts.
@@ -23,13 +23,13 @@ deposit and withdraw money, and manage their accounts.
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository:
 
    ```shell
    git clone https://github.com/Wiederholung/Simple-Banking-System.git
    ```
 
-2. Navigate to the directory where you downloaded the repository
+2. Navigate to the directory where you downloaded the repository:
 
    ```shell
    cd Simple-Banking-System
@@ -37,11 +37,12 @@ deposit and withdraw money, and manage their accounts.
 
    Optional: open the project in IDEA
 
-3. Compile `mvn compile`
-4. Run unit tests `mvn test`
+3. Compile: `mvn compile`
+4. Run unit tests: `mvn test`
 
 ## Usage
 
+[//]: # (TODO)
 You can create different types of accounts with varying properties and features. A sample code shows how to create an
 account and perform some actions on it:
 
@@ -59,6 +60,6 @@ public class Sample {
 }
 ```
 
-## Contributors
+## Contributor
 
 - [Yitong Hu](https://yitong-hu.metattri.com/)
