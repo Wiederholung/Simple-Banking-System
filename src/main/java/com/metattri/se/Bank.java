@@ -13,6 +13,10 @@ public class Bank {
     private final Map<String, BankAccount> accountMap = new HashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final File dataFile = new File("src/main/resources/accounts.json");
+    private static final String CURRENT_ACCOUNT_TYPE = "CurrentAccount";
+    private static final String BANK_ACCOUNT_TYPE = "BankAccount";
+    private static final String JUNIOR_ACCOUNT_TYPE = "JuniorAccount";
+
 
     public Bank() throws IOException {
         this.loadAccounts();
@@ -97,60 +101,76 @@ public class Bank {
         return false;
     }
 
-    public String changeAccountType(String accNo, String tgtType) {
-        if (this.isValid(accNo)) {
-            BankAccount currAccount = this.accountMap.get(accNo);
-            String currType = currAccount.getType();
-            String newAccNo;
+    public String changeAccountType(String accNo, String tgtType) throws IllegalArgumentException {
+        if (!isValid(accNo)) {
+            throw new IllegalArgumentException("Invalid account");
+        }
 
-            if (currType.equals(tgtType)) {
-                System.out.println("Account type is already " + tgtType);
-                return accNo;
+        BankAccount currAccount = accountMap.get(accNo);
+        String currType = currAccount.getType();
+
+        if (currType.equals(tgtType)) {
+            throw new IllegalArgumentException("Account type is already " + tgtType);
+        }
+
+        switch (currType) {
+            case CURRENT_ACCOUNT_TYPE -> {
+                return handleCurrentAccount(currAccount, tgtType);
             }
-
-            switch (currType) {
-                case "CurrentAccount" -> {
-                    if (currAccount.getBalance() >= 0) {
-                        if (tgtType.equals("BankAccount")) {
-                            newAccNo = openAccount(currAccount.getAccName(), tgtType);
-                            this.deposit(newAccNo, currAccount.getBalance());
-                            this.closeAccount(accNo);
-                            return newAccNo;
-                        } else {
-                            throw new IllegalArgumentException("Invalid target account type");
-                        }
-                    } else {
-                        throw new IllegalArgumentException("Account balance is negative");
-                    }
-                }
-                case "BankAccount" -> {
-                    if (tgtType.equals("CurrentAccount")) {
-                        newAccNo = openAccount(currAccount.getAccName(), tgtType);
-                        this.deposit(newAccNo, currAccount.getBalance());
-                        this.closeAccount(accNo);
-                        return newAccNo;
-                    } else {
-                        throw new IllegalArgumentException("Invalid target account type");
-                    }
-                }
-                case "JuniorAccount" -> {
-                    if (tgtType.equals("CurrentAccount") || tgtType.equals("BankAccount")) {
-                        if (((JuniorAccount) currAccount).getAge() >= 16) {
-                            newAccNo = openAccount(currAccount.getAccName(), tgtType);
-                            this.deposit(newAccNo, currAccount.getBalance());
-                            this.closeAccount(accNo);
-                            return newAccNo;
-                        } else {
-                            throw new IllegalArgumentException("Account holder is under 16");
-                        }
-                    }
-                }
-                default -> System.out.println("Invalid account type");
+            case BANK_ACCOUNT_TYPE -> {
+                return handleBankAccount(currAccount, tgtType);
+            }
+            case JUNIOR_ACCOUNT_TYPE -> {
+                return handleJuniorAccount((JuniorAccount) currAccount, tgtType);
+            }
+            default -> {
+                System.out.println("Invalid account type");
+                throw new IllegalArgumentException("Invalid account type");
             }
         }
-        // invalid account
-        throw new IllegalArgumentException("Invalid account");
     }
+
+    private String handleCurrentAccount(BankAccount currAccount, String tgtType) throws IllegalArgumentException {
+        if (currAccount.getBalance() < 0) {
+            throw new IllegalArgumentException("Account balance is negative");
+        }
+
+        if (tgtType.equals(BANK_ACCOUNT_TYPE)) {
+            String newAccNo = openAccount(currAccount.getAccName(), tgtType);
+            deposit(newAccNo, currAccount.getBalance());
+            closeAccount(currAccount.getAccNo());
+            return newAccNo;
+        } else {
+            throw new IllegalArgumentException("Invalid target account type");
+        }
+    }
+
+    private String handleBankAccount(BankAccount currAccount, String tgtType) throws IllegalArgumentException {
+        if (!tgtType.equals(CURRENT_ACCOUNT_TYPE)) {
+            throw new IllegalArgumentException("Invalid target account type");
+        }
+
+        String newAccNo = openAccount(currAccount.getAccName(), tgtType);
+        deposit(newAccNo, currAccount.getBalance());
+        closeAccount(currAccount.getAccNo());
+        return newAccNo;
+    }
+
+    private String handleJuniorAccount(JuniorAccount currAccount, String tgtType) throws IllegalArgumentException {
+        if (tgtType.equals(CURRENT_ACCOUNT_TYPE) || tgtType.equals(BANK_ACCOUNT_TYPE)) {
+            if (currAccount.getAge() < 16) {
+                throw new IllegalArgumentException("Account holder is under 16");
+            }
+
+            String newAccNo = openAccount(currAccount.getAccName(), tgtType);
+            deposit(newAccNo, currAccount.getBalance());
+            closeAccount(currAccount.getAccNo());
+            return newAccNo;
+        } else {
+            throw new IllegalArgumentException("Invalid target account type");
+        }
+    }
+
 
     public double checkBalance(String accNo) {
         if (this.isValid(accNo)) {

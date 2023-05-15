@@ -12,6 +12,7 @@ class BankTest {
             "f7790c67-2dbc-4df4-91d9-8d6fc7645264",
             "f4566a74-379a-409a-a24b-69b542f4566c",
             "a85e67d1-d99a-403e-883c-9a020a44ca22",
+            "cc24d6ea-ca28-49da-b8d5-1b8b60376db4"
     };
     private Bank bank;
 
@@ -24,7 +25,6 @@ class BankTest {
         }
     }
 
-    @Test
     void testDepositAndWithdraw() {
         assertTrue(bank.deposit(uuid[0], 1000.0));
         assertEquals(1000.0, bank.checkBalance(uuid[0]));
@@ -79,7 +79,29 @@ class BankTest {
 
     @Test
     void testChangeAccountType() {
-        System.out.println(bank.changeAccountType("cc24d6ea-ca28-49da-b8d5-1b8b60376db4", "CurrentAccount"));
-//        System.out.println(bank.changeAccountType("f4566a74-379a-409a-a24b-69b542f4566c", "JuniorAccount"));
+        testDepositAndWithdraw();
+
+        String newAccNo;
+        // BankAccount to BankAccount
+        assertThrows(IllegalArgumentException.class, () -> bank.changeAccountType(uuid[0], "BankAccount"));
+        // BankAccount to JuniorAccount
+        assertThrows(IllegalArgumentException.class, () -> bank.changeAccountType(uuid[0], "JuniorAccount"));
+        // BankAccount to CurrentAccount
+        System.out.println(bank.changeAccountType(uuid[0], "CurrentAccount"));
+
+        // CurrentAccount to CurrentAccount
+        assertThrows(IllegalArgumentException.class, () -> bank.changeAccountType(uuid[1], "CurrentAccount"));
+        // CurrentAccount to JuniorAccount
+        assertThrows(IllegalArgumentException.class, () -> bank.changeAccountType(uuid[1], "JuniorAccount"));
+        // CurrentAccount to BankAccount
+        System.out.println(bank.changeAccountType(uuid[1], "BankAccount"));
+
+        // JuniorAccount to JuniorAccount
+        assertThrows(IllegalArgumentException.class, () -> bank.changeAccountType(uuid[3], "JuniorAccount"));
+        // JuniorAccount to CurrentAccount
+        newAccNo = bank.changeAccountType(uuid[3], "CurrentAccount");
+        System.out.println(newAccNo);
+        // JuniorAccount to BankAccount
+        assertThrows(IllegalArgumentException.class, () -> bank.changeAccountType("test", "BankAccount"));
     }
 }
