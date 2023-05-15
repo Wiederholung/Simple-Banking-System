@@ -21,7 +21,12 @@ public class Sample {
         assert !bank.deposit("test", 1000.0);
         bank.suspendAccount("test", false);
 
-        String newAccNo = bank.changeAccountType("test", "CurrentAccount");
+        String newAccNo = null;
+        try {
+            newAccNo = bank.changeAccountType("test", "CurrentAccount");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("new account number: " + newAccNo);
 
         bank.closeAccount(newAccNo);
