@@ -9,9 +9,9 @@ deposit and withdraw money, and manage their accounts.
 - Withdraw policy for CurrentAccount and JuniorAccount
 - Ability to suspend and close accounts
 - Java unit tests for each account type and the Bank class
-- Data persistence using JSON (v1)
-- Ability to change the type of account (v2)
-- Fast lookup enabled by HashMap (v3)
+- Data persistence using JSON (_v1_)
+- Ability to change the type of account (_v2_)
+- Fast lookup enabled by HashMap (_v3_)
 
 ## Getting Started
 
@@ -86,7 +86,7 @@ public class Sample {
 
 Note
 
-1. See more usage in the [JUnit tests](src/test/java/com/metattri/se).
+1. See more usage in the [JUnit tests](src/test/java/com/metattri/se) and design details in the [UML](UML.png) diagram.
 
 2. The account number is a UUID, which is a random string. You can look up the account number via:
     - `bank.printAccounts();`
