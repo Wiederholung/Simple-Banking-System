@@ -18,30 +18,31 @@ public class Bank {
         this.loadAccounts();
     }
 
-    public void openAccount(BankAccount account) {
+    public String openAccount(BankAccount account) {
         this.accountMap.put(account.getAccNo(), account);
         this.saveAccounts();
+        return account.getAccNo();
     }
 
-    public void openAccount(String accName, String accType) {
+    public String openAccount(String accName, String accType) {
         BankAccount account = switch (accType) {
             case "CurrentAccount" -> new CurrentAccount(accName);
             case "BankAccount" -> new BankAccount(accName);
             default -> throw new IllegalArgumentException("Invalid account type");
         };
-        openAccount(account);
+        return openAccount(account);
     }
 
-    public void openAccount(String accName, Double odLimit) {
-        openAccount(new CurrentAccount(accName, odLimit));
+    public String openAccount(String accName, Double odLimit) {
+        return openAccount(new CurrentAccount(accName, odLimit));
     }
 
-    public void openAccount(String accName, int age) {
-        openAccount(new JuniorAccount(accName, age));
+    public String openAccount(String accName, int age) {
+        return openAccount(new JuniorAccount(accName, age));
     }
 
-    public void openAccount(String accName, int age, double maxWithdrawal) {
-        openAccount(new JuniorAccount(accName, age, maxWithdrawal));
+    public String openAccount(String accName, int age, double maxWithdrawal) {
+        return openAccount(new JuniorAccount(accName, age, maxWithdrawal));
     }
 
     public boolean isValid(String accNo) {
@@ -96,23 +97,59 @@ public class Bank {
         return false;
     }
 
-    public String changeAccountType(String accNo, String accType) {
+    public String changeAccountType(String accNo, String tgtType) {
         if (this.isValid(accNo)) {
-            JuniorAccount currAccount = (JuniorAccount) this.accountMap.get(accNo);
+            BankAccount currAccount = this.accountMap.get(accNo);
+            String currType = currAccount.getType();
+            String newAccNo;
 
-            if (currAccount.getAge() >= 16) {
-                BankAccount account = switch (accType) {
-                    case "CurrentAccount" -> new CurrentAccount(currAccount.getAccName());
-                    case "BankAccount" -> new BankAccount(currAccount.getAccName());
-                    default -> throw new IllegalArgumentException("Invalid account type");
-                };
-                this.accountMap.put(account.getAccNo(), account);
-                this.deposit(account.getAccNo(), currAccount.getBalance());
-                this.closeAccount(accNo);
-                return account.getAccNo();
+            if (currType.equals(tgtType)) {
+                System.out.println("Account type is already " + tgtType);
+                return accNo;
+            }
+
+            switch (currType) {
+                case "CurrentAccount" -> {
+                    if (currAccount.getBalance() >= 0) {
+                        if (tgtType.equals("BankAccount")) {
+                            newAccNo = openAccount(currAccount.getAccName(), tgtType);
+                            this.deposit(newAccNo, currAccount.getBalance());
+                            this.closeAccount(accNo);
+                            return newAccNo;
+                        } else {
+                            throw new IllegalArgumentException("Invalid target account type");
+                        }
+                    } else {
+                        throw new IllegalArgumentException("Account balance is negative");
+                    }
+                }
+                case "BankAccount" -> {
+                    if (tgtType.equals("CurrentAccount")) {
+                        newAccNo = openAccount(currAccount.getAccName(), tgtType);
+                        this.deposit(newAccNo, currAccount.getBalance());
+                        this.closeAccount(accNo);
+                        return newAccNo;
+                    } else {
+                        throw new IllegalArgumentException("Invalid target account type");
+                    }
+                }
+                case "JuniorAccount" -> {
+                    if (tgtType.equals("CurrentAccount") || tgtType.equals("BankAccount")) {
+                        if (((JuniorAccount) currAccount).getAge() >= 16) {
+                            newAccNo = openAccount(currAccount.getAccName(), tgtType);
+                            this.deposit(newAccNo, currAccount.getBalance());
+                            this.closeAccount(accNo);
+                            return newAccNo;
+                        } else {
+                            throw new IllegalArgumentException("Account holder is under 16");
+                        }
+                    }
+                }
+                default -> System.out.println("Invalid account type");
             }
         }
-        return null;
+        // invalid account
+        throw new IllegalArgumentException("Invalid account");
     }
 
     public double checkBalance(String accNo) {

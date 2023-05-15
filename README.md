@@ -59,7 +59,7 @@ public class Sample {
             throw new RuntimeException(e);
         }
 
-        bank.openAccount(new CurrentAccount("your name"));
+        System.out.println("new account number: " + bank.openAccount(new CurrentAccount("your name")));
 
         bank.deposit("test", 500.0);
         bank.withdraw("test", 1000.0);
@@ -69,7 +69,8 @@ public class Sample {
         assert !bank.deposit("test", 1000.0);
         bank.suspendAccount("test", false);
 
-        String newAccNo = bank.changeAccountType("cc24d6ea-ca28-49da-b8d5-1b8b60376db4", "CurrentAccount");
+        String newAccNo = bank.changeAccountType("test", "CurrentAccount");
+        System.out.println("new account number: " + newAccNo);
 
         bank.closeAccount(newAccNo);
 
@@ -82,8 +83,10 @@ Note
 
 1. See more usage in the [JUnit tests](src/test/java/com/metattri/se).
 
-2. The account number is a UUID, which is a random string. You can look up the account number via calling
-   `bank.printAccounts();`.
+2. The account number is a UUID, which is a random string. You can look up the account number via:
+    - `bank.printAccounts();`
+    - `String accNo = bank.openAccount(new BankAccount("your name"));`
+    - [accounts.json](src/main/resources/accounts.json)
 
 3. The database file [accounts.json](src/main/resources/accounts.json) is stored in the directory `src/main/resources`,
    which is the default directory for resources in Maven. You can change the directory in
@@ -92,7 +95,8 @@ Note
 4. After running the [JUnit tests](src/test/java/com/metattri/se)
    or [Sample.java](src/main/java/com/metattri/se/Sample.java), you can check the database file to see the changes.
 
-5. Remember to [rollback](https://stackoverflow.com/questions/6599798/how-to-undo-a-git-rollback) the changes in the [accounts.json](src/main/resources/accounts.json) if you want to run the
+5. Remember to **[rollback](https://git-scm.com/docs/git-revert)** the changes in
+   the [accounts.json](src/main/resources/accounts.json) if you want to run the
    tests again.
 
 ## Contributor

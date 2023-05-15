@@ -64,11 +64,11 @@ class BankTest {
         assertFalse(bank.isValid("test"));
         assertEquals(4, bank.getNumOfAccounts());
 
-        bank.openAccount("Yitong Hu", 200000.0);
-        bank.openAccount("John2", "CurrentAccount");
-        bank.openAccount("Jane2", "BankAccount");
-        bank.openAccount("Kid3", 13);
-        bank.openAccount("Kid4", 14, 400.0);
+        System.out.println(bank.openAccount("Yitong Hu", 200000.0));
+        System.out.println(bank.openAccount("John2", "CurrentAccount"));
+        System.out.println(bank.openAccount("Jane2", "BankAccount"));
+        System.out.println(bank.openAccount("Kid3", 13));
+        System.out.println(bank.openAccount("Kid4", 14, 400.0));
         bank.printAccounts();
     }
 
@@ -80,5 +80,6 @@ class BankTest {
     @Test
     void testChangeAccountType() {
         System.out.println(bank.changeAccountType("cc24d6ea-ca28-49da-b8d5-1b8b60376db4", "CurrentAccount"));
+//        System.out.println(bank.changeAccountType("f4566a74-379a-409a-a24b-69b542f4566c", "JuniorAccount"));
     }
 }
