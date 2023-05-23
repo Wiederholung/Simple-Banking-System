@@ -25,6 +25,7 @@ class BankTest {
         }
     }
 
+    @Test
     void testDepositAndWithdraw() {
         assertTrue(bank.deposit(uuid[0], 1000.0));
         assertEquals(1000.0, bank.checkBalance(uuid[0]));
