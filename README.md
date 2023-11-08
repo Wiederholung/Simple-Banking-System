@@ -1,5 +1,7 @@
 # Simple Banking System
 
+> Personal Project of EBU6304 Software Engineering (2022/23)
+
 This is a Java project that implements a basic bank account management system, allowing users to create accounts,
 deposit and withdraw money, and manage their accounts.
 
